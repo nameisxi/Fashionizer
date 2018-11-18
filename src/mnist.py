@@ -2,7 +2,6 @@ import numpy as np
 import math
 from PIL import Image
 import cv2
-from matplotlib import pyplot as plt
 
 
 class MnistCreator():
