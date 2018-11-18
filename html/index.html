@@ -7,18 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/upload-button.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/upload-button.css" />
     <!--<script src="/index.js" type="module"></script>-->
 </head>
 <body>
     <div id="default">
         <h1 id="Fashionizer">Fashionizer</h1>
         <h2>Accepted file types: .jpg and .png</h2>
-        <form action="/results" enctype="multipart/form-data" method="POST"> 
+        <!--action="http://localhost:5000/upload"-->
+        <form action="http://localhost:5000/" enctype="multipart/form-data" method="POST"> 
             <!--<input id="fileInputField" type="file" accept=".jpg, .png" placeholder="Upload">-->
-            <input type="file" name="photo" accept=".jpg, .png"/>
-            <input type="submit" value="Upload Photo"/>
+            <input type="file" name="file" accept=".jpg, .png"/>
+            <input type="submit" value="Upload Image"/>
         </form>
         <!--<div class="button"><label for="fileInputField">Upload</label></div>-->
     </div>
