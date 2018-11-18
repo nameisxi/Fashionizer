@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fashionizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/upload-button.css" />
+    <!--<script src="/index.js" type="module"></script>-->
+</head>
+<body>
+    <div id="default">
+        <h1 id="Fashionizer">Fashionizer</h1>
+        <h2>Accepted file types: .jpg and .png</h2>
+        <form action="/results" enctype="multipart/form-data" method="POST"> 
+            <!--<input id="fileInputField" type="file" accept=".jpg, .png" placeholder="Upload">-->
+            <input type="file" name="photo" accept=".jpg, .png"/>
+            <input type="submit" value="Upload Photo"/>
+        </form>
+        <!--<div class="button"><label for="fileInputField">Upload</label></div>-->
+    </div>
+    </br>
+</body>
+</html>

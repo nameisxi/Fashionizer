@@ -1,0 +1,64 @@
+body {
+	color: #000000;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+}
+
+label {
+	display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+	overflow: hidden;
+	width: auto;
+	height: 100%;
+	padding: 1.25em;
+	text-align: center;
+}
+
+label:hover {
+	cursor: pointer;
+}
+
+.button {
+	flex: 1 1 auto;
+	margin-top: 0.1%;
+	border: 1px solid #000000;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	overflow: hidden;
+	transition: .3s;
+	overflow-y:hidden;
+}
+
+.button:after {
+	position: absolute;
+	transition: .3s;
+	content: '';
+	width: 0;
+	left: 50%;
+	bottom: 0;
+	height: 3px;
+	background: #000000;
+}
+
+.button:after {
+	height: 120%;
+	left: -10%;
+	transform: skewX(45deg); /*15deg*/
+	z-index: -1;
+}
+
+.button:hover:after {
+	width: 100%;
+	left: 0;
+}
+
+.button:hover:nth-of-type(1), .button:hover:nth-of-type(2), .button:hover:nth-of-type(3), .button:hover:nth-of-type(4) {
+	color: #FFFFFF;
+}
+
+.button:hover:after {
+	left: -10%;
+	width: 120%;
+}

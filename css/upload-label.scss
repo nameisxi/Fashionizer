@@ -1,0 +1,46 @@
+body {
+    color: #000000;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+  .button {
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #000000;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    overflow:hidden;
+    transition: .3s;
+    &:after {
+      position: absolute;
+      transition: .3s;
+      content: '';
+      width: 0;
+      left: 50%;
+      bottom: 0;
+      height: 3px;
+      background: #000000;
+    }
+    &:after {
+      height: 120%;
+      left: -10%;
+      transform: skewX(15deg);
+      z-index: -1;
+    }
+    &:hover {
+      cursor: pointer;
+      &:after {
+        width: 100%;
+        left: 0;
+      }
+      &:nth-of-type(1) {
+        color: #FFFFFF;
+      }
+      &:after {
+        left: -10%;
+        width: 120%;
+      }
+    }
+  }

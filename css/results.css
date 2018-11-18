@@ -1,0 +1,27 @@
+/*#image.resize {
+    max-width: 750px;
+    height: auto;
+}*/
+
+/*#image {
+    max-width: 100%;
+    max-height: auto;
+}*/
+
+#image-canvas {
+    width: 100%;
+    height: auto;
+    background-color: palevioletred;
+}
+
+/*#image-container {
+    max-height: 50%;
+    width: 100%;
+    margin-bottom: 1%
+}*/
+
+
+/*#image-canvas {
+    max-width: 300px;
+    max-height: 300px;
+}*/
