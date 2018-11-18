@@ -19,20 +19,23 @@ def allowed_file(filename):
 
 def pre_process_image(image, filename):
     mnist_creator = MnistCreator()
+    image = mnist_creator.get_as_png('./tmp/' + filename, './tmp/img.png')
     image_data = np.asarray(image)
     image_data = mnist_creator.crop(image_data)
     image_data = mnist_creator.trim(image_data)
     img = Image.fromarray(image_data.astype('uint8'), 'RGB')
-    img.save('result.png')
+    img.save('./tmp/result.png')
     image = mnist_creator.resize_longest_edge('result.png')
     image_data = np.asarray(image)
     image_data = mnist_creator.extend_shortest_edge(image, image_data)
     negative = mnist_creator.negate_intensities(image_data)
     grayscale = mnist_creator.convert_to_grayscale(negative)
-    cv2.imwrite('result.png', grayscale)
+    cv2.imwrite('./tmp/result.png', grayscale)
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
+    if os.path.exists("./tmp/result.png"):
+        os.remove("./tmp/result.png")
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -48,36 +51,22 @@ def root():
             return redirect('http://localhost:5000/results')
     return send_from_directory('html', 'index.html')
 
-@app.route('/tmp/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+@app.route('/img')
+def get_img():
+    return send_from_directory('tmp', 'result.png')
 
-@app.route('/upload')
-def upload():
-    print("upload nauttais toimivan")
-    '''if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            print("file saving toimii")
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            pre_process_image(file)
-            return send_from_directory('html', 'upload.html')
-    return redirect('http://localhost:5000/')'''
-    #return send_from_directory('html', 'upload.html')
-    return redirect('http://localhost:5000/results')
+@app.route('/model')
+def get_model():
+    return send_from_directory('model', 'model.json')
+
+@app.route('/group1-shard1of1')
+def get_shard():
+    return send_from_directory('model', 'group1-shard1of1')
 
 @app.route('/results')
 def results():
+    if os.path.exists("./tmp/img.png"):
+        os.remove("./tmp/img.png")
     return send_from_directory('html', 'results.html')
 
 if __name__ == '__main__':

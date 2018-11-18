@@ -54,7 +54,7 @@ class MnistCreator():
         '''Resizes the longest edge to 28 pixels by subsampling the pixels and
             scales the shorter edge accordingly.
         '''
-        image = cv2.imread(file_name)
+        image = cv2.imread('./tmp/' + file_name)
         height, width, channels = image.shape
         if height >= width:
             new_width = int((width / height) * 28)

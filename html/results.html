@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,19 +8,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="/index.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="/upload.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="/croppie.css"/>
-    <script src="./src/croppie.js"></script>
-    <script>
-
-    </script>
+    <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/results.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.4/dist/tf.min.js"></script>
 </head>
+
 <body>
     <div id="default">
         <h1 id="Fashionizer">Fashionizer</h1>
-        <h2>Processing the image...</h2>
+        <div id="image-container">
+            <canvas id="image-canvas"></canvas>
+        </div>
+        <div id="price-container">
+            <h2>How old is the fashion item?</h2>
+            <p>years</p>
+            <select id="years">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+
+            <p>months</p>
+            <select id="months">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+            </select>
+
+            <button onclick="getPrice()">Get price</button>
+        </div>
     </div>
     </br>
+    <script>
+        async function classify() {
+            let classes = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot'];
+
+            console.log("loading model...");
+            let model = await tf.loadModel('http://localhost:5000/model');
+            console.log("done");
+
+            console.log("getting image...");
+            let canvas = document.getElementById('image-canvas');
+            let ctx = canvas.getContext('2d');
+            let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            console.log("done");
+
+            let image = tf.fromPixels(imageData);
+            console.log(image);
+            // Tarpeellinen?
+            let normalization_tensor = tf.fill([28, 28, 3], 255, dtype='int32');
+            let normalizedImage = tf.div(image, normalization_tensor)
+            image = image.mean(2);
+
+            image = image.expandDims(0);
+            console.log(image)
+            const predictions = model.predict(image);
+            console.log(predictions.print());
+            let prediction = predictions.dataSync();
+            prediction = tf.argMax(prediction).dataSync()[0];
+
+            const result = "Fashion item detected in the image: " + classes[prediction];
+
+            let div = document.getElementById('image-container');
+            div.appendChild(document.createTextNode(result));
+
+            return null;
+        }
+
+        function draw() {
+            let canvas = document.getElementById('image-canvas');
+            let ctx = canvas.getContext('2d');
+            let img = new Image();
+            let ios = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+            img.onload = function () {
+                canvas.height = 28
+                canvas.width = 28
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                if (ios) {
+                    ctx.rotate(Math.PI / 2);
+                }
+                classify();
+            };
+            img.src = 'http://localhost:5000/img';
+        }
+        draw();
+    </script>
 </body>
+
 </html>
