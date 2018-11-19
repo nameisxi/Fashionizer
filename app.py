@@ -46,7 +46,8 @@ def root():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename('img.png')
-            file.save(os.path.join(app.root_path, 'tmp', filename))
+            #file.save(os.path.join(app.root_path, 'tmp', filename))
+            file.save(os.path.join("/tmp/", filename))
             pre_process_image(file, filename)
             return redirect('https://fashionizer.herokuapp.com/results')
     return send_from_directory('html', 'index.html')
