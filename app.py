@@ -48,7 +48,7 @@ def root():
             filename = secure_filename('img.png')
             file.save(os.path.join(app.root_path, 'tmp', filename))
             pre_process_image(file, filename)
-            return redirect('http://localhost:5000/results')
+            return redirect('https://fashionizer.herokuapp.com/results')
     return send_from_directory('html', 'index.html')
 
 @app.route('/img')
