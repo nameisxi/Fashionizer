@@ -7,7 +7,8 @@ import cv2
 class MnistCreator():
     def get_as_png(self, file_name, save_as):
         '''Converts the input image to PNG format.'''
-        image = Image.open(file_name)
+        #image = Image.open(file_name)
+        image = Image.open('./tmp/img.png')
         image.save(save_as)
         image = Image.open(save_as)
         return image
