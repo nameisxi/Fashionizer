@@ -34,7 +34,7 @@ def pre_process_image(image, filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
-    if !os.path.exists("./tmp"):
+    if not os.path.exists("./tmp"):
         os.mkdir('./tmp')
     if os.path.exists("./tmp/result.png"):
         os.remove("./tmp/result.png")
