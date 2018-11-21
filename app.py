@@ -1,6 +1,5 @@
 import os
 import numpy as np
-from PIL import Image
 import cv2
 from os.path import join, dirname, realpath
 from flask import Flask, flash, request, redirect, url_for, send_from_directory
@@ -19,18 +18,27 @@ def allowed_file(filename):
 
 def pre_process_image(image, filename):
     mnist_creator = MnistCreator()
-    image = mnist_creator.get_as_png('./tmp/' + filename, './tmp/img.png')
-    image_data = np.asarray(image)
-    image_data = mnist_creator.crop(image_data)
+    path_to_original = './tmp/' + filename
+    path = './tmp/img.png'
+    image = mnist_creator.get_as_png(path_to_original, path)
+    image_data = mnist_creator.remove_background(image)
     image_data = mnist_creator.trim(image_data)
-    img = Image.fromarray(image_data.astype('uint8'), 'RGB')
-    img.save('./tmp/result.png')
-    image = mnist_creator.resize_longest_edge('result.png')
-    image_data = np.asarray(image)
-    image_data = mnist_creator.extend_shortest_edge(image, image_data)
-    negative = mnist_creator.negate_intensities(image_data)
-    grayscale = mnist_creator.convert_to_grayscale(negative)
-    cv2.imwrite('./tmp/result.png', grayscale)
+    image_data = mnist_creator.resize_longest_edge(path, image_data)
+    image_data = mnist_creator.extend_shortest_edge(path, image_data)
+    image_data = mnist_creator.negate_intensities(image_data)
+    image = mnist_creator.convert_to_grayscale(path, image_data)
+    cv2.imwrite(path, image)
+
+    #image_data = mnist_creator.crop(image_data)
+    #image_data = mnist_creator.trim(image_data)
+    #img = Image.fromarray(image_data.astype('uint8'), 'RGB')
+    #img.save('./tmp/result.png')
+    #image = mnist_creator.resize_longest_edge('result.png')
+    #image_data = np.asarray(image)
+    #image_data = mnist_creator.extend_shortest_edge(image, image_data)
+    #negative = mnist_creator.negate_intensities(image_data)
+    #grayscale = mnist_creator.convert_to_grayscale(negative)
+    #cv2.imwrite('./tmp/result.png', grayscale)
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
