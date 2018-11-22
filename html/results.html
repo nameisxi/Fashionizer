@@ -25,6 +25,7 @@
         <h1 id="Fashionizer">Fashionizer</h1>
         <div id="image-container">
             <canvas id="original-image-canvas"></canvas>
+            <br>
             <canvas id="image-canvas"></canvas>
         </div>
         <div id="price-container">
@@ -97,8 +98,8 @@
             let originalImg = new Image();
             let ios = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
             originalImg.onload = function () {
-                originalImageCanvas.height = 224
-                originalImageCanvas.width = 224
+                originalImageCanvas.height = 280
+                originalImageCanvas.width = 280
                 originalCtx.drawImage(originalImg, 0, 0, originalImageCanvas.width, originalImageCanvas.height);
                 if (ios) {
                     ctx.rotate(Math.PI / 2);
