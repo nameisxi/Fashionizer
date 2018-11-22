@@ -143,3 +143,7 @@ h3 {
     background-color: lightcoral;
     border: 1px solid red;
 }
+
+#image-container {
+    padding-top: 1%;
+}

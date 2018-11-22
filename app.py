@@ -57,14 +57,17 @@ def root():
             file.save(os.path.join(app.root_path, 'tmp', filename))
             #file.save(os.path.join("/tmp/", filename))
             pre_process_image(file, filename)
-            return redirect('https://fashionizer.herokuapp.com/results')
-            #return redirect('http://localhost:5000/results')
+            #return redirect('https://fashionizer.herokuapp.com/results')
+            return redirect('http://localhost:5000/results')
     return send_from_directory('html', 'index.html')
 
 @app.route('/img')
 def get_img():
-    #return send_from_directory('./tmp', 'result.png')
     return send_from_directory('tmp', 'result.png')
+
+@app.route('/original-img')
+def get_original_img():
+    return send_from_directory('tmp', 'img.png')
 
 @app.route('/model')
 def get_model():
@@ -76,9 +79,6 @@ def get_shard():
 
 @app.route('/results')
 def results():
-    #response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    #response.headers["Pragma"] = "no-cache"
-    #response.headers["Expires"] = "0"
     return send_from_directory('html', 'results.html')
 
 @app.route('/index-css')
