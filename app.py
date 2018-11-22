@@ -8,7 +8,7 @@ from src.mnist import MnistCreator
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='css')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -80,6 +80,14 @@ def results():
     #response.headers["Pragma"] = "no-cache"
     #response.headers["Expires"] = "0"
     return send_from_directory('html', 'results.html')
+
+@app.route('/index-css')
+def index_css():
+    return send_from_directory('css', 'index.css')
+
+@app.route('/upload-button-css')
+def upload_button_css():
+    return send_from_directory('css', 'upload-button.css')
 
 if __name__ == '__main__':
     app.secret_key = 'something'
