@@ -147,7 +147,10 @@ h3 {
 #image-container {
     padding-top: -140%;
 }
-
-#months-container, #years-container {
+#years-container {
+    display: inline-block;
+    margin-right: 1%;
+}
+#months-container {
     display: inline-block;
 }
