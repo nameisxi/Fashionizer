@@ -27,6 +27,9 @@
             <canvas id="original-image-canvas"></canvas>
             <br>
             <canvas id="image-canvas"></canvas>
+            <br>
+            <p>Fashion item detected in the image:</p>
+            <br>
         </div>
         <div id="price-container">
             <h2>How old is the fashion item?</h2>
@@ -85,7 +88,7 @@
             let prediction = predictions.dataSync();
             prediction = tf.argMax(prediction).dataSync()[0];
 
-            const result = "Fashion item detected in the image: " + classes[prediction];
+            const result = classes[prediction];
             let div = document.getElementById('image-container');
             div.appendChild(document.createTextNode(result));
             canvas.hidden = true;
