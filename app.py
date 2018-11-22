@@ -27,25 +27,17 @@ def pre_process_image(image, filename):
     image_data = mnist_creator.extend_shortest_edge(path, image_data)
     image_data = mnist_creator.negate_intensities(image_data)
     image = mnist_creator.convert_to_grayscale(path, image_data)
-    cv2.imwrite(path, image)
-
-    #image_data = mnist_creator.crop(image_data)
-    #image_data = mnist_creator.trim(image_data)
-    #img = Image.fromarray(image_data.astype('uint8'), 'RGB')
-    #img.save('./tmp/result.png')
-    #image = mnist_creator.resize_longest_edge('result.png')
-    #image_data = np.asarray(image)
-    #image_data = mnist_creator.extend_shortest_edge(image, image_data)
-    #negative = mnist_creator.negate_intensities(image_data)
-    #grayscale = mnist_creator.convert_to_grayscale(negative)
-    #cv2.imwrite('./tmp/result.png', grayscale)
+    cv2.imwrite('./tmp/result.png', image)
+    
+    if os.path.exists(".tmp/img.png"):
+        os.remove(".tmp/img.png")
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
-    if not os.path.exists("./tmp"):
-        os.mkdir('./tmp')
     if os.path.exists("./tmp/result.png"):
-        os.remove("./tmp/result.png")
+        os.rename("./tmp/result.png", "./tmp/old.png")
+        os.remove("./tmp/old.png")
+
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -65,7 +57,7 @@ def root():
 
 @app.route('/img')
 def get_img():
-    return send_from_directory('tmp', 'result.png')
+    return send_from_directory('./tmp', 'result.png')
 
 @app.route('/model')
 def get_model():
@@ -77,10 +69,9 @@ def get_shard():
 
 @app.route('/results')
 def results():
-    if os.path.exists("./tmp/img.png"):
-        os.remove("./tmp/img.png")
     return send_from_directory('html', 'results.html')
 
 if __name__ == '__main__':
     app.secret_key = 'something'
     app.run(debug = True)
+    #app.run()
