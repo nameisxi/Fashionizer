@@ -55,7 +55,8 @@ def root():
 
 @app.route('/img')
 def get_img():
-    return send_from_directory('./tmp', 'result.png')
+    #return send_from_directory('./tmp', 'result.png')
+    return send_from_directory('tmp', 'result.png')
 
 @app.route('/model')
 def get_model():
@@ -67,9 +68,11 @@ def get_shard():
 
 @app.route('/results')
 def results():
+    #response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    #response.headers["Pragma"] = "no-cache"
+    #response.headers["Expires"] = "0"
     return send_from_directory('html', 'results.html')
 
 if __name__ == '__main__':
     app.secret_key = 'something'
-    #app.run(debug = True)
     app.run()

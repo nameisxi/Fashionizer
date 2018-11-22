@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Fashionizer</title>
@@ -58,34 +61,25 @@
     <script>
         async function classify() {
             let classes = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot'];
-
-            console.log("loading model...");
+;
             let model = await tf.loadModel('https://fashionizer.herokuapp.com/model');
             //let model = await tf.loadModel('http://localhost:5000/model');
-            console.log("done");
 
-            console.log("getting image...");
             let canvas = document.getElementById('image-canvas');
             let ctx = canvas.getContext('2d');
             let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            console.log("done");
 
             let image = tf.fromPixels(imageData);
-            console.log(image);
-            // Tarpeellinen?
             let normalization_tensor = tf.fill([28, 28, 3], 255, dtype='int32');
             let normalizedImage = tf.div(image, normalization_tensor)
             image = image.mean(2);
-
             image = image.expandDims(0);
-            console.log(image)
+
             const predictions = model.predict(image);
-            console.log(predictions.print());
             let prediction = predictions.dataSync();
             prediction = tf.argMax(prediction).dataSync()[0];
 
             const result = "Fashion item detected in the image: " + classes[prediction];
-
             let div = document.getElementById('image-container');
             div.appendChild(document.createTextNode(result));
 
