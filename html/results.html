@@ -13,10 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
-    <!--<link href="https://fashionizer.herokuapp.com/index-css" rel="stylesheet" type="text/css" media="screen"/>-->
-    <link href="http://localhost:5000/index-css" rel="stylesheet" type="text/css" media="screen"/>
-    <!--<link href="https://fashionizer.herokuapp.com/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>-->
-    <link href="http://localhost:5000/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="https://fashionizer.herokuapp.com/index-css" rel="stylesheet" type="text/css" media="screen"/>
+    <!--<link href="http://localhost:5000/index-css" rel="stylesheet" type="text/css" media="screen"/>-->
+    <link href="https://fashionizer.herokuapp.com/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>-->
+    <!--<link href="http://localhost:5000/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>-->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.4/dist/tf.min.js"></script>
 </head>
 
@@ -67,8 +67,8 @@
         async function classify() {
             let classes = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot'];
 ;
-            //let model = await tf.loadModel('https://fashionizer.herokuapp.com/model');
-            let model = await tf.loadModel('http://localhost:5000/model');
+            let model = await tf.loadModel('https://fashionizer.herokuapp.com/model');
+            //let model = await tf.loadModel('http://localhost:5000/model');
 
             let canvas = document.getElementById('image-canvas');
             let ctx = canvas.getContext('2d');
@@ -104,8 +104,8 @@
                     ctx.rotate(Math.PI / 2);
                 }
             };
-            originalImg.src = 'http://localhost:5000/original-img';
-            //originalImg.src = 'https://fashionizer.herokuapp.com/original-img'
+            //originalImg.src = 'http://localhost:5000/original-img';
+            originalImg.src = 'https://fashionizer.herokuapp.com/original-img'
 
             let canvas = document.getElementById('image-canvas');
             let ctx = canvas.getContext('2d');
@@ -119,8 +119,8 @@
                 }
                 classify();
             };
-            img.src = 'http://localhost:5000/img';
-            //img.src = 'https://fashionizer.herokuapp.com/img'
+            //img.src = 'http://localhost:5000/img';
+            img.src = 'https://fashionizer.herokuapp.com/img'
         }
         draw();
     </script>
