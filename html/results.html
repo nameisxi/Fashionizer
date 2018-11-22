@@ -60,8 +60,8 @@
             let classes = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot'];
 
             console.log("loading model...");
-            //let model = await tf.loadModel('https://fashionizer.herokuapp.com/model');
-            let model = await tf.loadModel('http://localhost:5000/model');
+            let model = await tf.loadModel('https://fashionizer.herokuapp.com/model');
+            //let model = await tf.loadModel('http://localhost:5000/model');
             console.log("done");
 
             console.log("getting image...");
@@ -106,7 +106,8 @@
                 }
                 classify();
             };
-            img.src = 'http://localhost:5000/img';
+            //img.src = 'http://localhost:5000/img';
+            img.src = 'https://fashionizer.herokuapp.com/img'
         }
         draw();
     </script>

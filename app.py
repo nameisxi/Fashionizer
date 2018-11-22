@@ -6,11 +6,9 @@ from flask import Flask, flash, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from src.mnist import MnistCreator
 
-#UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
-#app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -51,8 +49,8 @@ def root():
             file.save(os.path.join(app.root_path, 'tmp', filename))
             #file.save(os.path.join("/tmp/", filename))
             pre_process_image(file, filename)
-            #return redirect('https://fashionizer.herokuapp.com/results')
-            return redirect('http://localhost:5000/results')
+            return redirect('https://fashionizer.herokuapp.com/results')
+            #return redirect('http://localhost:5000/results')
     return send_from_directory('html', 'index.html')
 
 @app.route('/img')
@@ -73,5 +71,5 @@ def results():
 
 if __name__ == '__main__':
     app.secret_key = 'something'
-    app.run(debug = True)
-    #app.run()
+    #app.run(debug = True)
+    app.run()
