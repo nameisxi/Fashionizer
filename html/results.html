@@ -88,7 +88,7 @@
             const result = "Fashion item detected in the image: " + classes[prediction];
             let div = document.getElementById('image-container');
             div.appendChild(document.createTextNode(result));
-
+            canvas.hidden = true;
             return null;
         }
 
