@@ -1,2 +1,4 @@
 # Fashionizer
-Fashionizer is a web app with Flask backend that uses my Clothing Classifier model to predict the apparel type in uploaded image. Preprocessing includes turning uploaded image into 28x28 MNIST image that resembles images from the Fashion MNIST, on which Clothing Classifier has been trained on.
+Fashionizer is a web app that let's users classify apparel, and get outfit recommendations based on Spotify playlist.
+
+Note: The outfit recommendation system is still buggy and on development phase.
