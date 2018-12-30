@@ -12,22 +12,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
-    <link href="https://fashionizer.herokuapp.com/index-css" rel="stylesheet" type="text/css" media="screen"/>
-    <!--<link href="http://localhost:5000/index-css" rel="stylesheet" type="text/css" media="screen"/>-->
-    <link href="https://fashionizer.herokuapp.com/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>
-    <!--<link href="http://localhost:5000/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>-->
+    <!--<link href="https://fashionizer.herokuapp.com/index-css" rel="stylesheet" type="text/css" media="screen"/>-->
+    <link href="http://localhost:5000/index-css" rel="stylesheet" type="text/css" media="screen"/>
+    <!--<link href="https://fashionizer.herokuapp.com/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>-->
+    <link href="http://localhost:5000/upload-button-css" rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
     <div id="default">
         <h1 id="Fashionizer">Fashionizer</h1>
-        <h2>Accepted file types: .jpg and .png</h2>
-        <form action="https://fashionizer.herokuapp.com/" enctype="multipart/form-data" method="POST">
-        <!--<form action="http://localhost:5000/" enctype="multipart/form-data" method="POST">-->
-            <!--<input id="fileInputField" type="file" accept=".jpg, .png" placeholder="Upload">-->
-            <input type="file" name="file" accept=".jpg, .png"/>
-            <input type="submit" value="Upload Image"/>
-        </form>
-        <!--<div class="button"><label for="fileInputField">Upload</label></div>-->
+        <h2><a href="http://localhost:5000/classify">Classify Fashion</a></h2>
+        <h2><a href="http://localhost:5000/recommend">Recommend Fashion</a></h2>
     </div>
     </br>
 </body>
