@@ -98,7 +98,7 @@ def classification_results():
 #------------------------------------------------------------------#
 # Apparel recommendation                                           #
 #------------------------------------------------------------------#
-def get_artists(sp, uri):
+'''def get_artists(sp, uri):
     username = uri.split(':')[2]
     playlist_id = uri.split(':')[4]
 
@@ -142,7 +142,7 @@ def get_input_vector(genres):
     input_vector = np.zeros((10, 1))
     for genre in genres:
         genre = genre.strip().lower()
-        if 'pop' in genre:
+        if 'pop' in genre or 'r&b' in genre:
             input_vector[0, 0] += 1
         elif 'rap' in genre:
             input_vector[1, 0] += 1
@@ -189,7 +189,7 @@ def recommendation_results():
         return redirect('http://localhost:5000/recommend')
     predictions = get_predictions(input_vector)
     #return send_from_directory('html', 'recommendation-results.html')
-    return render_template('recommendation-results.html', prediction=predictions)
+    return render_template('recommendation-results.html', prediction=predictions)'''
 
 
 #------------------------------------------------------------------#
